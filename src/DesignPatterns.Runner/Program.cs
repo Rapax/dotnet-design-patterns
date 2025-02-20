@@ -2,6 +2,8 @@
 
 using System.Text;
 using DesignPatterns.Builder;
+using DesignPatterns.FactoryMethod.Abstract;
+using DesignPatterns.FactoryMethod.Factories;
 using DesignPatterns.Strategy;
 
 Console.WriteLine("Design Patterns Demo");
@@ -9,9 +11,11 @@ Console.WriteLine("-------------------");
 Console.WriteLine("Strategy Pattern");
 ShowStrategy();
 Console.WriteLine("-------------------");
-Console.WriteLine("-------------------");
 Console.WriteLine("Builder Pattern");
 ShowBuilder();
+Console.WriteLine("-------------------");
+Console.WriteLine("Factory Method Pattern");
+ShowFactoryMethod();
 Console.WriteLine("-------------------");
 void ShowStrategy()
 {
@@ -41,4 +45,24 @@ void ShowBuilder()
 
     var message = mailMessage.Print();
     Console.WriteLine(message);
+}
+
+void ShowFactoryMethod()
+{
+    VehicleFactory factory;
+
+    // Create a Car
+    factory = new CarFactory();
+    IVehicle car = factory.CreateVehicle();
+    car.Drive(); // Output: Driving a car...
+
+    // Create a Bike
+    factory = new BikeFactory();
+    IVehicle bike = factory.CreateVehicle();
+    bike.Drive(); // Output: Riding a bike...
+    
+    // Create a Bike
+    factory = new MotoFactory();
+    IVehicle moto = factory.CreateVehicle();
+    moto.Drive(); // Output: Riding a moto...
 }
