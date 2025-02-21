@@ -5,6 +5,8 @@ using DesignPatterns.AbstractFactory;
 using DesignPatterns.AbstractFactory.Abstract;
 using DesignPatterns.AbstractFactory.Factories;
 using DesignPatterns.Builder;
+using DesignPatterns.Decorator;
+using DesignPatterns.Decorator.Abstract;
 using DesignPatterns.FactoryMethod.Abstract;
 using DesignPatterns.FactoryMethod.Factories;
 using DesignPatterns.Strategy;
@@ -22,6 +24,9 @@ ShowFactoryMethod();
 Console.WriteLine("-------------------");
 Console.WriteLine("Abstract Factory Pattern");
 ShowAbstractFactory();
+Console.WriteLine("-------------------");
+Console.WriteLine("Decorator Pattern");
+ShowDecorator();
 Console.WriteLine("-------------------");
 void ShowStrategy()
 {
@@ -87,4 +92,13 @@ void ShowAbstractFactory()
 
     Application app = new Application(factory);
     app.Render();
+}
+
+void ShowDecorator()
+{
+    INotifier notifier = new EmailNotifier();
+    notifier = new SMSNotifier(notifier);
+    notifier = new FacebookNotifier(notifier);
+
+    notifier.Send("Hello, Decorator Pattern!");
 }
