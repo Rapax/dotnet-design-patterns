@@ -1,6 +1,9 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 using System.Text;
+using DesignPatterns.AbstractFactory;
+using DesignPatterns.AbstractFactory.Abstract;
+using DesignPatterns.AbstractFactory.Factories;
 using DesignPatterns.Builder;
 using DesignPatterns.FactoryMethod.Abstract;
 using DesignPatterns.FactoryMethod.Factories;
@@ -16,6 +19,9 @@ ShowBuilder();
 Console.WriteLine("-------------------");
 Console.WriteLine("Factory Method Pattern");
 ShowFactoryMethod();
+Console.WriteLine("-------------------");
+Console.WriteLine("Abstract Factory Pattern");
+ShowAbstractFactory();
 Console.WriteLine("-------------------");
 void ShowStrategy()
 {
@@ -65,4 +71,20 @@ void ShowFactoryMethod()
     factory = new MotoFactory();
     IVehicle moto = factory.CreateVehicle();
     moto.Drive(); // Output: Riding a moto...
+}
+
+void ShowAbstractFactory()
+{
+    IUIFactory factory;
+
+    // Simulating runtime theme selection
+    string theme = "dark"; // or "light"
+
+    if (theme == "dark")
+        factory = new DarkUIFactory();
+    else
+        factory = new LightUIFactory();
+
+    Application app = new Application(factory);
+    app.Render();
 }
